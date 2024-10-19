@@ -1,0 +1,25 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.8  
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: |
+            python -m venv venv
+            . venv/bin/activate
+            pip install requests
+      - run:
+          name: Run Script
+          command: |
+            . venv/bin/activate
+            python3 function.py  # Replace with your script's name
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
